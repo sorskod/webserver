@@ -1,5 +1,5 @@
 # webserver
-Guice WebServer Module - backed by latest Jetty, Jersey and Jackson.
+Guice WebServer Module - backed by latest Jetty, Jersey and Jackson. **Without HK2-Guice bridge.**
 
 Library is useful for lite web services, like simple REST endpoints. JSON output is the only supported. 
 
