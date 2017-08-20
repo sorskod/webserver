@@ -1,5 +1,8 @@
 package com.sorskod.webserver;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -17,9 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.Feature;
@@ -62,11 +63,34 @@ public class WebServerModuleTest {
     }
   }
 
+
+  static class SubmitBody {
+    @JsonProperty
+    private String body;
+
+    @JsonCreator
+    public SubmitBody(@JsonProperty(value = "body", required = true) String body) {
+      this.body = body;
+    }
+  }
+
   @Path("/")
   @Produces("application/json")
+  @Consumes("application/json")
   public interface RootResource {
     @GET
     Response get();
+
+    @GET
+    @Path("/runtime-error")
+    Response runtimeError();
+
+    @GET
+    @Path("/badrequest-error")
+    Response badRequestError();
+
+    @POST
+    Response create(SubmitBody body);
   }
 
   @Singleton
@@ -81,6 +105,21 @@ public class WebServerModuleTest {
 
     public Response get() {
       return Response.ok(Collections.singletonMap("message", service.getMessage())).build();
+    }
+
+    @Override
+    public Response runtimeError() {
+      throw new RuntimeException("Some random error.");
+    }
+
+    @Override
+    public Response badRequestError() {
+      throw new BadRequestException("Some random BadRequestException.");
+    }
+
+    @Override
+    public Response create(SubmitBody body) {
+      return Response.accepted().entity(body).build();
     }
   }
 

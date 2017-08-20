@@ -6,12 +6,14 @@ import com.google.inject.multibindings.ProvidesIntoSet;
 import com.google.inject.servlet.ServletModule;
 import com.sorskod.webserver.annotations.BaseConfiguration;
 import com.sorskod.webserver.features.BoundWebResourcesFeature;
+import com.sorskod.webserver.features.JsonJacksonFeature;
+import com.sorskod.webserver.mappers.RuntimeExceptionMapper;
+import com.sorskod.webserver.mappers.WebApplicationExceptionMapper;
 import com.sorskod.webserver.providers.*;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.inject.Provider;
@@ -60,11 +62,20 @@ public class WebServerModule extends AbstractModule {
 
   @ProvidesIntoSet
   Class<? extends Feature> jacksonFeature() {
-    return JacksonFeature.class;
+    return JsonJacksonFeature.class;
   }
 
   @ProvidesIntoSet
   Class<? extends Feature> boundWebResourcesFeature() {
     return BoundWebResourcesFeature.class;
+  }
+
+  @ProvidesIntoSet
+  Feature exceptionMappersFeature() {
+    return (context) -> {
+      context.register(RuntimeExceptionMapper.class);
+      context.register(WebApplicationExceptionMapper.class);
+      return true;
+    };
   }
 }

@@ -1,6 +1,7 @@
 package com.sorskod.webserver.providers;
 
 import com.google.inject.Injector;
+import org.glassfish.jersey.CommonProperties;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,9 @@ public class DefaultResourceConfigProvider implements Provider<ResourceConfig> {
   @Override
   public ResourceConfig get() {
     ResourceConfig config = new ResourceConfig();
+
+    // Still considering to disable auto discovery...
+    //config.property(CommonProperties.FEATURE_AUTO_DISCOVERY_DISABLE, true);
 
     Stream.concat(features.stream(), featureClasses.stream().map(injector::getInstance))
         .peek(f -> LOGGER.info("Register feature: {}", f))
