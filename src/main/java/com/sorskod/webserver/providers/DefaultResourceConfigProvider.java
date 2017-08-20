@@ -1,13 +1,15 @@
 package com.sorskod.webserver.providers;
 
+import com.google.inject.Injector;
 import org.glassfish.jersey.server.ResourceConfig;
-
-import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
-import javax.inject.Singleton;
 import javax.ws.rs.core.Feature;
+import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * Default RC provider is about to instantiate {@link ResourceConfig}
@@ -17,17 +19,29 @@ import javax.ws.rs.core.Feature;
  */
 public class DefaultResourceConfigProvider implements Provider<ResourceConfig> {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(DefaultResourceConfigProvider.class);
+
   private final Set<Feature> features;
+  private final Set<Class<? extends Feature>> featureClasses;
+  private final Injector injector;
 
   @Inject
-  public DefaultResourceConfigProvider(Set<Feature> features) {
+  public DefaultResourceConfigProvider(Set<Feature> features,
+                                       Set<Class<? extends Feature>> featureClasses,
+                                       Injector injector) {
     this.features = features;
+    this.featureClasses = featureClasses;
+    this.injector = injector;
   }
 
   @Override
   public ResourceConfig get() {
     ResourceConfig config = new ResourceConfig();
-    features.forEach(config::register);
+
+    Stream.concat(features.stream(), featureClasses.stream().map(injector::getInstance))
+        .peek(f -> LOGGER.info("Register feature: {}", f))
+        .forEach(config::register);
+
     return config;
   }
 }

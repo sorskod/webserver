@@ -1,16 +1,13 @@
 package com.sorskod.webserver.providers;
 
 import com.sorskod.webserver.connectors.ConnectorFactory;
-
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 
-import java.util.Set;
-
 import javax.inject.Inject;
 import javax.inject.Provider;
-import javax.inject.Singleton;
+import java.util.Set;
 
 /**
  * @author Aleksandar Babic

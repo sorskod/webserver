@@ -6,7 +6,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * @author Aleksandar Babic

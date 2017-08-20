@@ -1,14 +1,14 @@
 package com.sorskod.webserver;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.multibindings.Multibinder;
+import com.google.inject.multibindings.MultibindingsScanner;
+import com.google.inject.multibindings.ProvidesIntoSet;
 import com.google.inject.servlet.ServletModule;
-import com.sorskod.webserver.features.BoundWebResources;
-import com.sorskod.webserver.providers.DefaultResourceConfigProvider;
-import com.sorskod.webserver.providers.JettyServerProvider;
-import com.sorskod.webserver.providers.ServletContextHandlerProvider;
-import com.sorskod.webserver.providers.ServletHolderProvider;
+import com.sorskod.webserver.annotations.BaseConfiguration;
+import com.sorskod.webserver.features.BoundWebResourcesFeature;
+import com.sorskod.webserver.providers.*;
 import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.jackson.JacksonFeature;
@@ -16,8 +16,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.inject.Provider;
 import javax.ws.rs.core.Feature;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Aleksandar Babic
@@ -25,6 +23,7 @@ import java.util.Set;
 public class WebServerModule extends AbstractModule {
 
   protected void configure() {
+    install(MultibindingsScanner.asModule());
     install(new ServletModule());
 
     bind(ServletHolder.class)
@@ -43,20 +42,11 @@ public class WebServerModule extends AbstractModule {
         .toProvider(resourceConfigProvider())
         .asEagerSingleton();
 
+    bind(HttpConfiguration.class)
+        .annotatedWith(BaseConfiguration.class)
+        .toProvider(HttpConfigurationProvider.class)
+        .asEagerSingleton();
 
-    //Multibinder.newSetBinder(binder(), Feature.class).addBinding().to(BoundWebResources.class);
-    //Multibinder.newSetBinder(binder(), Feature.class).addBinding().to(JacksonFeature.class);
-
-
-    features().forEach(f -> Multibinder.newSetBinder(binder(), Feature.class).addBinding().to(f));
-  }
-
-  private Set<Class<? extends Feature>> features() {
-    Set<Class<? extends Feature>> features = new HashSet<>(2);
-    features.add(JacksonFeature.class);
-    features.add(BoundWebResources.class);
-
-    return features;
   }
 
   /**
@@ -66,5 +56,15 @@ public class WebServerModule extends AbstractModule {
    */
   protected Class<? extends Provider<ResourceConfig>> resourceConfigProvider() {
     return DefaultResourceConfigProvider.class;
+  }
+
+  @ProvidesIntoSet
+  Class<? extends Feature> jacksonFeature() {
+    return JacksonFeature.class;
+  }
+
+  @ProvidesIntoSet
+  Class<? extends Feature> boundWebResourcesFeature() {
+    return BoundWebResourcesFeature.class;
   }
 }

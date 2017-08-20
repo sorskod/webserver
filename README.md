@@ -20,5 +20,44 @@ There is a working example in test package. However, here  is short guideline:
 4. Provide `Configurator` implementation
 5. Inject Jetty `Server` and call `start()`
 
+## Example:
+```java
+
+public class MyModule extends AbstractModule {
+  
+  protected void configure() {
+    
+    // Bind @Path annotated classes
+    bind(MyHttpResource.class);
+  }
+  
+  @Provides
+  @DefaultConnector
+  Configurator configuratorProvider() {
+    return () -> 8080; // WebServer port 
+  }
+  
+  @ProvidesIntoSet
+  Feature customJaxrsFeature() {
+    // Provide custom features, register filters, etc 
+    return (context) -> {};
+  }
+}
+
+Injector injector = Guice.createInjector(new WebServerModule(), 
+                                         new HTTPConnectorModule(),
+                                         new MyModule());
+
+
+injector.getInstance(Server.class).start();
+```
+
+
+
 #### IMPORTANT NOTE 
 Library is written for fun and test purposes. It's not complete and fully featured. Pull requests and improvement ideas are welcome.
+
+
+## TODO:
+- HTTPS support and tests
+- README & Wiki
