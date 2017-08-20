@@ -59,5 +59,6 @@ Library is written for fun and test purposes. It's not complete and fully featur
 
 
 ## TODO:
+- Publish to Maven Central
 - HTTPS support and tests
 - README & Wiki
