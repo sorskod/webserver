@@ -1,8 +1,10 @@
-# webserver
+# webserver 
+
 Guice WebServer Module - backed by latest Jetty, Jersey and Jackson. **Without HK2-Guice bridge.**
 
 Library is useful for lite web services, like simple REST endpoints. JSON output is the only supported. 
 
+[![Build Status](https://travis-ci.org/sorskod/webserver.svg?branch=master)](https://travis-ci.org/sorskod/webserver)
 
 ## Dependencies:
 - Guice 4.1
