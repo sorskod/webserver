@@ -27,10 +27,11 @@ public class HTTPConnectorFactory implements ConnectorFactory {
   }
 
   public ServerConnector get(Server server) {
-    HttpConnectionFactory connectionFactory = new HttpConnectionFactory(new HttpConfiguration(defaultConfig));
+    HttpConfiguration configuration = new HttpConfiguration(defaultConfig);
 
-    final ServerConnector connector = new ServerConnector(server, connectionFactory);
+    final ServerConnector connector = new ServerConnector(server, new HttpConnectionFactory(configuration));
     connector.setPort(configurator.getPort());
+    connector.setHost(configurator.getHost());
 
     return connector;
   }

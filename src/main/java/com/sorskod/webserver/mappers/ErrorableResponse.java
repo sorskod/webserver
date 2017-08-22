@@ -1,20 +1,16 @@
 package com.sorskod.webserver.mappers;
 
 import com.sorskod.webserver.entities.Error;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Collections;
-import java.util.Map;
 
 /**
  * @author Aleksandar Babic <salebab@gmail.com>
  */
 public interface ErrorableResponse {
-
-  Logger LOGGER = LoggerFactory.getLogger(ErrorableResponse.class);
 
   /**
    * Builds an error response from status and message.
@@ -36,11 +32,9 @@ public interface ErrorableResponse {
    * @return response
    */
   default Response buildResponse(Response.Status status, String message, Map<String, Object> details) {
-    LOGGER.debug("Error Response");
     return Response.status(status)
         .type(MediaType.APPLICATION_JSON_TYPE)
-        .entity(Collections.singletonMap("error", new Error(status.getStatusCode(), message, details)))
+        .entity(new Error(status.getStatusCode(), message, details).wrapped())
         .build();
   }
-
 }

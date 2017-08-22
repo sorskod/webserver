@@ -1,7 +1,6 @@
 package com.sorskod.webserver;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -12,20 +11,27 @@ import com.sorskod.webserver.annotations.DefaultConnector;
 import com.sorskod.webserver.annotations.SecureConnector;
 import com.sorskod.webserver.connectors.http.HTTPConnectorModule;
 import com.sorskod.webserver.connectors.https.HTTPSConnectorModule;
+
 import org.eclipse.jetty.server.Server;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.ws.rs.*;
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.Feature;
 import javax.ws.rs.core.Response;
-import java.util.Collections;
 
 /**
  * @author Aleksandar Babic
@@ -166,7 +172,7 @@ public class WebServerModuleTest {
     }
 
     ContainerResponseFilter xPoweredByFilter() {
-      return (req, res) -> res.getHeaders().add("X-Powered-By", "UnitTest Webserver");
+      return (req, res) -> res.getHeaders().add("X-Powered-By", "UnitTest-Webserver (1.0-SNAPSHOT)");
     }
 
     ContainerRequestFilter requestLoggerFilter() {

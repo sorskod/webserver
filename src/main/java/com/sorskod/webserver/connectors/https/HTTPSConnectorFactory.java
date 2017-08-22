@@ -31,14 +31,13 @@ public class HTTPSConnectorFactory implements ConnectorFactory {
 
   @Override
   public ServerConnector get(Server server) {
-    // TODO: Finish
-    HttpConfiguration config = new HttpConfiguration(defaultConfig);
-    config.setSecurePort(configurator.getPort());
-    config.setSecureScheme(HttpScheme.HTTPS.asString());
-    HttpConnectionFactory connectionFactory = new HttpConnectionFactory(config);
+    HttpConfiguration configuration = new HttpConfiguration(defaultConfig);
+    configuration.setSecurePort(configurator.getPort());
+    configuration.setSecureScheme(HttpScheme.HTTPS.asString());
 
-    final ServerConnector connector = new ServerConnector(server, connectionFactory);
+    final ServerConnector connector = new ServerConnector(server, new HttpConnectionFactory(configuration));
     connector.setPort(configurator.getPort());
+    connector.setHost(configurator.getHost());
 
     return connector;
   }

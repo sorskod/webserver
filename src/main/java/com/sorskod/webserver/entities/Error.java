@@ -2,6 +2,7 @@ package com.sorskod.webserver.entities;
 
 import com.fasterxml.jackson.annotation.*;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -17,6 +18,8 @@ import java.util.Map;
 )
 @JsonPropertyOrder({"code", "message"})
 public class Error {
+
+  private static final String NAME = "error";
 
   private final int code;
   private final String message;
@@ -48,5 +51,10 @@ public class Error {
   @JsonProperty
   public Map<String, Object> getDetails() {
     return details;
+  }
+
+  @JsonIgnore
+  public Map<String, Error> wrapped() {
+    return Collections.singletonMap(NAME, this);
   }
 }
