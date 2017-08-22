@@ -15,8 +15,6 @@ import javax.ws.rs.core.Feature;
 import javax.ws.rs.core.FeatureContext;
 import javax.ws.rs.core.Response;
 
-import static org.junit.Assert.*;
-
 /**
  * @author Aleksandar Babic
  */
@@ -60,5 +58,4 @@ public class BoundWebResourcesFeatureTest {
     @GET
     public Response get() { return Response.ok().build(); }
   }
-  //git commit -am "Configurable host, wrapped Error entity, some tests"
 }

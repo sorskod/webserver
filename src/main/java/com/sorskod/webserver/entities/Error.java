@@ -31,9 +31,9 @@ public class Error {
   }
 
   @JsonCreator
-  public Error(@JsonProperty(required = true) int code,
-               @JsonProperty(required = true) String message,
-               @JsonProperty Map<String, Object> details) {
+  public Error(@JsonProperty(value = "code", required = true) int code,
+               @JsonProperty(value = "message", required = true) String message,
+               @JsonProperty(value = "details") Map<String, Object> details) {
     this(code, message);
     this.details = details;
   }
