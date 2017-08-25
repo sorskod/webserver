@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Map;
 
 /**
- * @author Aleksandar Babic <salebab@gmail.com>
+ * @author Aleksandar Babic
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonAutoDetect(

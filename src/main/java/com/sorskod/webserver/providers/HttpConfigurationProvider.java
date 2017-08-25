@@ -5,7 +5,7 @@ import org.eclipse.jetty.server.HttpConfiguration;
 import javax.inject.Provider;
 
 /**
- * @author Aleksandar Babic <salebab@gmail.com>
+ * @author Aleksandar Babic
  */
 public class HttpConfigurationProvider implements Provider<HttpConfiguration> {
 

@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * @author Aleksandar Babic <salebab@gmail.com>
+ * @author Aleksandar Babic
  */
 public interface ErrorableResponse {
 

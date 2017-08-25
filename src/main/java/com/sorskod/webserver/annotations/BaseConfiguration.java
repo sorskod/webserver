@@ -11,7 +11,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * @author Aleksandar Babic <salebab@gmail.com>
+ * @author Aleksandar Babic
  */
 @BindingAnnotation
 @Target({ FIELD, PARAMETER, METHOD }) @Retention(RUNTIME)

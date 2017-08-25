@@ -10,7 +10,7 @@ import java.util.Collections;
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 
 /**
- * @author Aleksandar Babic <salebab@gmail.com>
+ * @author Aleksandar Babic
  */
 public class JsonMappingExceptionMapper implements ExceptionMapper<JsonMappingException>, ErrorableResponse {
   @Override

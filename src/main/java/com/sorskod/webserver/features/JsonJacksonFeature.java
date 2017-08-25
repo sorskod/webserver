@@ -20,7 +20,7 @@ import javax.ws.rs.ext.MessageBodyWriter;
  * Registers Exception Mappers which are returns application/json instead of text/plain for error messages
  *
  * @see org.glassfish.jersey.jackson.JacksonFeature
- * @author Aleksandar Babic <salebab@gmail.com>
+ * @author Aleksandar Babic
  */
 public class JsonJacksonFeature implements Feature {
 

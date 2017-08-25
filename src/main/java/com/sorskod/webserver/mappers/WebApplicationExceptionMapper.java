@@ -5,7 +5,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
 /**
- * @author Aleksandar Babic <salebab@gmail.com>
+ * @author Aleksandar Babic
  */
 public class WebApplicationExceptionMapper implements ExceptionMapper<WebApplicationException>, ErrorableResponse {
 
