@@ -12,6 +12,34 @@ Library is useful for lite web services, like simple REST endpoints. JSON output
 - Jersey 2.25.1
 - Jackson 2.8.4
 
+## Snapshot installation
+
+In your POM, add OSS Sonartype repository and following dependency:
+
+```xml
+<project>
+    <repositories>
+        <repository>
+            <id>oss-sonatype</id>
+            <name>oss-sonatype</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    
+    <dependencies>
+        <dependency>
+          <groupId>com.sorskod.webserver</groupId>
+          <artifactId>webserver</artifactId>
+          <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+</project>
+
+```
+
 ## Usage:
 
 There is a working example in test package. However, here  is short guideline:
@@ -23,6 +51,7 @@ There is a working example in test package. However, here  is short guideline:
 5. Inject Jetty `Server` and call `start()`
 
 ## Example:
+
 ```java
 
 public class MyModule extends AbstractModule {
@@ -61,6 +90,5 @@ Library is written for fun and test purposes. It's not complete and fully featur
 
 
 ## TODO:
-- Publish to Maven Central
 - HTTPS support and tests
 - README & Wiki
