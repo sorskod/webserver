@@ -9,7 +9,7 @@ Library is useful for lite web services, like simple REST endpoints. JSON output
 ## Dependencies:
 - Guice 4.1
 - Jetty 9.4.6
-- Jersey 2.25.1
+- Jersey 2.26
 - Jackson 2.8.4
 
 ## Snapshot installation
@@ -90,6 +90,6 @@ Library is written for fun and test purposes. It's not complete and fully featur
 
 
 ## TODO:
-- Remove HK2 and implement Guice as only DI framework 
+- Remove HK2 and make Guice as only DI framework 
 - HTTPS support and tests
 - README & Wiki
