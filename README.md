@@ -90,5 +90,6 @@ Library is written for fun and test purposes. It's not complete and fully featur
 
 
 ## TODO:
+- Remove HK2 and implement Guice as only DI framework 
 - HTTPS support and tests
 - README & Wiki

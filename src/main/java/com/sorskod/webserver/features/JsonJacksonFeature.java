@@ -1,13 +1,13 @@
 package com.sorskod.webserver.features;
 
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import com.sorskod.webserver.mappers.JsonParseExceptionMapper;
 import com.sorskod.webserver.mappers.JsonMappingExceptionMapper;
+import com.sorskod.webserver.mappers.JsonParseExceptionMapper;
 import org.glassfish.jersey.CommonProperties;
 import org.glassfish.jersey.internal.InternalProperties;
 import org.glassfish.jersey.internal.util.PropertiesHelper;
 import org.glassfish.jersey.jackson.internal.FilteringJacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.JacksonFilteringFeature;
+import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.message.filtering.EntityFilteringFeature;
 
 import javax.ws.rs.core.Configuration;
