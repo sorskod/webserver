@@ -1,10 +1,13 @@
 package com.sorskod.webserver.providers;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceFilter;
 
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.glassfish.jersey.servlet.ServletProperties;
 
 import java.util.EnumSet;
 
@@ -18,10 +21,12 @@ import javax.servlet.DispatcherType;
 public class ServletContextHandlerProvider implements Provider<Handler> {
 
   private final ServletHolder servletHolder;
+  private final Injector injector;
 
   @Inject
-  public ServletContextHandlerProvider(ServletHolder servletHolder) {
+  public ServletContextHandlerProvider(ServletHolder servletHolder, Injector injector) {
     this.servletHolder = servletHolder;
+    this.injector = injector;
   }
 
   public Handler get() {
@@ -29,7 +34,7 @@ public class ServletContextHandlerProvider implements Provider<Handler> {
     handler.setContextPath("/");
     handler.addFilter(GuiceFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
     handler.addServlet(servletHolder, "/*");
-
+    handler.setAttribute(ServletProperties.SERVICE_LOCATOR, injector);
     return handler;
   }
 }
