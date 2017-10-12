@@ -11,15 +11,19 @@ import com.sorskod.webserver.annotations.DefaultConnector;
 import com.sorskod.webserver.connectors.http.HTTPConnectorModule;
 import com.sorskod.webserver.entities.Error;
 
+import com.sorskod.webserver.inject.GuiceInjectionManager;
 import org.eclipse.jetty.server.Server;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
