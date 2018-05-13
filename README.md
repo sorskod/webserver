@@ -7,9 +7,9 @@ Library is useful for lite web services, like simple REST endpoints. JSON output
 [![Build Status](https://travis-ci.org/sorskod/webserver.svg?branch=master)](https://travis-ci.org/sorskod/webserver)
 
 ## Dependencies:
-- Guice 4.1
+- Guice 4.2
 - Jetty 9.4.6
-- Jersey 2.26
+- Jersey 2.27
 - Jackson 2.8.4
 
 ## Snapshot installation
