@@ -12,8 +12,12 @@ cache:
   - "~/.m2/repository"
 before_deploy:
   - "./cd/before-deploy.sh"
-after_success:
-- "./cd/deploy.sh"
+deploy:
+  - provider: script
+    script: mvn deploy -P sign,build-extras -s cd/maven-settings.xml -DskipTests
+    on:
+      branch: master
+      tags: true
 branches:
   only:
     - master
