@@ -86,10 +86,9 @@ injector.getInstance(Server.class).start();
 
 
 #### IMPORTANT NOTE 
-Library is written for fun and test purposes. It's not complete and fully featured. Pull requests and improvement ideas are welcome.
+Library is written for fun and test purposes. Pull requests and improvement ideas are welcome.
 
 
 ## TODO:
 - Remove HK2 and make Guice as only DI framework 
-- HTTPS support and tests
 - README & Wiki
