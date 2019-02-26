@@ -35,7 +35,6 @@ import javax.ws.rs.core.Feature;
 public class WebServerModule extends AbstractModule {
 
   protected void configure() {
-    install(MultibindingsScanner.asModule());
     install(new ServletModule());
 
     requireBinding(Key.get(new TypeLiteral<Set<ConnectorFactory>>() {}));
