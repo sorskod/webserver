@@ -13,11 +13,17 @@ cache:
 before_deploy:
   - "./cd/before-deploy.sh"
 deploy:
+  # deploy to snapshot repo
   - provider: script
     script: mvn deploy -P sign,build-extras -s cd/maven-settings.xml -DskipTests
     on:
       branch: master
-      tags: false
+  # deploy to releases
+  - provider: script
+    script: mvn versions:set -DnewVersion=$TRAVIS_TAG; && mvn deploy -P sign,build-extras -s cd/maven-settings.xml -DskipTests
+    on:
+      tags: true
+      all_branches: true
 branches:
   only:
     - master
