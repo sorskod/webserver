@@ -17,7 +17,7 @@ deploy:
     script: mvn deploy -P sign,build-extras -s cd/maven-settings.xml -DskipTests
     on:
       branch: master
-      tags: true
+      tags: false
 branches:
   only:
     - master
