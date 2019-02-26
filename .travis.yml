@@ -10,8 +10,9 @@ env:
 cache:
   directories:
   - "~/.m2/repository"
+before_deploy:
+  - "./cd/before-deploy.sh"
 after_success:
-- "./cd/before-deploy.sh"
 - "./cd/deploy.sh"
 branches:
   only:
