@@ -20,7 +20,7 @@ deploy:
       branch: master
   # deploy to releases
   - provider: script
-    script: mvn versions:set -DnewVersion=$TRAVIS_TAG; && mvn deploy -P sign,build-extras -s cd/maven-settings.xml -DskipTests
+    script: mvn versions:set -DnewVersion=$TRAVIS_TAG && mvn deploy -P sign,build-extras -s cd/maven-settings.xml -DskipTests
     on:
       tags: true
       all_branches: true
