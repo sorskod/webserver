@@ -24,3 +24,8 @@ deploy:
     on:
       tags: true
       all_branches: true
+# safelist
+branches:
+  only:
+    - master
+    - /^v\d+\.\d+.\d+$/
