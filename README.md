@@ -7,10 +7,10 @@ Library is useful for lite web services. Following JAX-RS convention it's so eas
 [![Build Status](https://travis-ci.org/sorskod/webserver.svg?branch=master)](https://travis-ci.org/sorskod/webserver)
 
 ## Dependencies
-- Guice 4.2.2
-- Jetty 9.4.12
-- Jersey 2.28
-- Jackson 2.9.8 (Transitive)
+- Guice
+- Jetty 
+- Jersey
+- Jackson 2 (Transitive)
 
 ## Installation
 
@@ -20,7 +20,7 @@ In your POM file, add following dependency:
 <dependency>
   <groupId>com.sorskod.webserver</groupId>
   <artifactId>webserver</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
@@ -47,7 +47,7 @@ For the latest snapshot version, you need to add add OSS Sonartype repository to
         <dependency>
           <groupId>com.sorskod.webserver</groupId>
           <artifactId>webserver</artifactId>
-          <version>1.0-SNAPSHOT</version>
+          <version>1.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
