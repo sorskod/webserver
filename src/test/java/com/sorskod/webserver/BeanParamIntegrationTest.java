@@ -8,6 +8,7 @@ import com.sorskod.webserver.annotations.DefaultConnector;
 import com.sorskod.webserver.connectors.http.HTTPConnectorModule;
 import org.eclipse.jetty.server.Server;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -26,9 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static javax.ws.rs.core.Response.Status.OK;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
-
 /**
  * @author Aleksandar Babic
  */
@@ -89,7 +87,7 @@ public class BeanParamIntegrationTest {
     Response response = invocationBuilder.get();
     Map<String, String> entity = response.readEntity(new GenericType<Map<String, String>>() {});
 
-    assertThat(response.getStatus(), equalTo(OK.getStatusCode()));
-    assertThat(entity.get("author"), equalTo("Scott Oaks"));
+    Assert.assertEquals(OK.getStatusCode(), response.getStatus());
+    Assert.assertEquals("Scott Oaks", entity.get("author"));
   }
 }

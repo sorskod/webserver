@@ -1,12 +1,8 @@
 package com.sorskod.webserver.entities;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
 
 /**
  * @author Aleksandar Babic
@@ -33,8 +29,8 @@ public class ErrorTest {
   public void itShouldDeserialize() throws Exception {
     String errorJson = "{\"code\":404,\"message\":\"Not Found\"}";
     Error error = OBJECT_MAPPER.readValue(errorJson, Error.class);
-    Assert.assertThat(error.getCode(), equalTo(404));
-    Assert.assertThat(error.getMessage(), equalTo("Not Found"));
+    Assert.assertEquals(404, error.getCode());
+    Assert.assertEquals("Not Found", error.getMessage());
   }
 
   @Test
@@ -42,7 +38,7 @@ public class ErrorTest {
     String errorJson = "{\"code\":404,\"message\":\"Not Found\",\"details\":{\"value\":1}}";
     Error error = OBJECT_MAPPER.readValue(errorJson, Error.class);
 
-    Assert.assertThat(error.getDetails(), notNullValue());
-    Assert.assertThat(error.getDetails().get("value"), equalTo(1));
+    Assert.assertNotNull(error.getDetails());
+    Assert.assertEquals(1, error.getDetails().get("value"));
   }
 }

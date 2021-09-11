@@ -10,7 +10,6 @@ import com.google.inject.multibindings.ProvidesIntoSet;
 import com.sorskod.webserver.annotations.DefaultConnector;
 import com.sorskod.webserver.connectors.http.HTTPConnectorModule;
 import com.sorskod.webserver.entities.Error;
-
 import org.eclipse.jetty.server.Server;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -18,17 +17,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collections;
-import java.util.Map;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
@@ -39,13 +30,12 @@ import javax.ws.rs.core.Feature;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Collections;
+import java.util.Map;
 
-import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
-import static javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
-import static javax.ws.rs.core.Response.Status.OK;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static javax.ws.rs.core.Response.Status.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Aleksandar Babic
@@ -82,8 +72,8 @@ public class WebServerIntegrationTest {
     Response response = invocationBuilder.get();
     Map<String, String> entity = response.readEntity(new GenericType<Map<String, String>>() {});
 
-    assertThat(response.getStatus(), equalTo(OK.getStatusCode()));
-    assertThat(entity.get("message"), equalTo("Hello."));
+    assertEquals(OK.getStatusCode(), response.getStatus());
+    assertEquals("Hello.", entity.get("message"));
   }
 
   @Test
@@ -95,9 +85,9 @@ public class WebServerIntegrationTest {
     Response response = invocationBuilder.get();
     Map<String, Error> entity = response.readEntity(new GenericType<Map<String, Error>>() {});
 
-    assertThat(response.getStatus(), equalTo(INTERNAL_SERVER_ERROR.getStatusCode()));
-    assertThat(entity.get("error").getCode(), equalTo(INTERNAL_SERVER_ERROR.getStatusCode()));
-    assertThat(entity.get("error").getMessage(), notNullValue());
+    assertEquals(INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
+    assertEquals(INTERNAL_SERVER_ERROR.getStatusCode(), entity.get("error").getCode());
+    assertNotNull(entity.get("error").getMessage());
   }
 
   @Test
@@ -109,9 +99,9 @@ public class WebServerIntegrationTest {
     Response response = invocationBuilder.get();
     Map<String, Error> entity = response.readEntity(new GenericType<Map<String, Error>>() {});
 
-    assertThat(response.getStatus(), equalTo(BAD_REQUEST.getStatusCode()));
-    assertThat(entity.get("error").getCode(), equalTo(BAD_REQUEST.getStatusCode()));
-    assertThat(entity.get("error").getMessage(), notNullValue());
+    assertEquals(BAD_REQUEST.getStatusCode(), response.getStatus());
+    assertEquals(BAD_REQUEST.getStatusCode(), entity.get("error").getCode());
+    assertNotNull(entity.get("error").getMessage());
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
