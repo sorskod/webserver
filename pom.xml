@@ -52,7 +52,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <guice.version>5.0.1</guice.version>
     <jersey.version>2.34</jersey.version>
-    <jetty.version>10.0.6</jetty.version>
+    <jetty.version>10.0.14</jetty.version>
     <slf4j.version>1.7.32</slf4j.version>
     <junit.version>4.13.1</junit.version>
   </properties>
